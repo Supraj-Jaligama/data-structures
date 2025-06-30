@@ -56,10 +56,10 @@ struct Node* insert(struct Node* node,int key){
     if(node == NULL)
     return createNode(key);
 
-    if(key>node->key)
+    if(key<node->key)
     node->left = insert(node->left,key);
 
-    else if(key<node->key)
+    else if(key>node->key)
     node->right = insert(node->right,key);
     else
     return node; 
@@ -68,10 +68,10 @@ struct Node* insert(struct Node* node,int key){
     int balance = getBalance(node);
 
     if(balance>1 && key<node->left->key)
-    return leftRotate(node);
+    return rightRotate(node);
 
     if(balance<-1 && key>node->right->key)
-    return rightRotate(node);
+    return leftRotate(node);
 
     if(balance>1 && key>node->left->key){
     node->left = leftRotate(node->left);
@@ -108,3 +108,4 @@ int main(){
       printf("\n");
       return 0;
 }
+
